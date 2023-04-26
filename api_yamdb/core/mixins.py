@@ -2,7 +2,6 @@ from rest_framework import filters, mixins, viewsets
 
 from api.permissions import IsAdminUserOrReadOnly
 from .validators import validate_username
-from rest_framework import mixins, viewsets
 
 
 class UsernameMixin:
@@ -24,8 +23,3 @@ class CategoryGenreMixin(ListCreateDestroyViewSet):
     filter_backends = (filters.SearchFilter, )
     lookup_field = 'slug'
     search_fields = ('name', )
-
-
-class UsernameMixin:
-    def validate_username(self, username):
-        return validate_username(username)
