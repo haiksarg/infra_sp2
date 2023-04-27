@@ -26,54 +26,42 @@
 
 ### Как запустить проект:
 
-Клонировать репозиторий и перейти в него в командной строке:
+Клонировать репозиторий:
 
 ```
-git clone git@github.com:haiksarg/api_yamdb.git
+git clone git@github.com:haiksarg/infra_sp2.git
 ```
 
 ```
-cd api_yamdb
+cd infra_sp2
 ```
 
-Cоздать и активировать виртуальное окружение:
+Развернуть проект:
 
 ```
-python3.7 -m venv venv
+cd infra
 ```
 
-* Если у вас Linux/MacOS
-
-    ```
-    source venv/bin/activate
-    ```
-
-* Если у вас windows
-
-    ```
-    source venv/scripts/activate
-    ```
-
 ```
-python3.7 -m pip install --upgrade pip
-```
-
-Установить зависимости из файла requirements.txt:
-
-```
-pip3.7 install -r requirements.txt
+docker-compose up -d --build
 ```
 
 Выполнить миграции:
 
 ```
-python3 manage.py migrate
+docker-compose exec web python manage.py migrate
 ```
 
-Запустить проект:
+Создать суперпользователя:
 
 ```
-python3 manage.py runserver
+docker-compose exec web python manage.py createsuperuser
+```
+
+Сбор статики:
+
+```
+docker-compose exec web python manage.py collectstatic --no-input
 ```
 
 ## Пользовательские роли
@@ -84,7 +72,7 @@ python3 manage.py runserver
 - Суперюзер Django — обладет правами администратора (admin)
 
 ## Примеры работы с учетными записями через запросы к API
-Подробная документация доступна по адресу `http://127.0.0.1:8000/redoc/`
+Подробная документация доступна по адресу `http://localhost/redoc/`
 
 Для неавторизованных пользователей работа с API доступна в режиме чтения, что-либо изменить или создать не получится.
 
